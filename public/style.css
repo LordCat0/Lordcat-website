@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=WDXL+Lubrifont+TC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+:root{
+    color-scheme: dark;
+    overflow: hidden;
+}body{
+    font-family: sans-serif;
+}.main-title{
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+}
+
+.navbar{
+    background-color: #1a1919;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 7px;
+}
+
+.navbar h2{
+    margin: 5px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.navbar div:not(.wrapper){
+    padding: 7px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #111010;
+    transition: 50ms;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.navbar div::before{
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: var(--icon-image);
+    background-size: cover;
+    margin-right: 15px;
+}
+
+.navbar div:not(.wrapper):hover{
+    background-color: #161515;
+}
+
+/*
+.navbar .wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-end;
+    height: 100%;
+}
+*/
+.wrapper {
+    position: absolute;
+    bottom: 10px; /* Adjust spacing */
+    left: 0;
+    width: 100%;
+}
+
+#home{--icon-image: url("./assets/icons/home.png")}
+#games{--icon-image: url("./assets/icons/game-controller.png")}
+#tools{--icon-image: url("./assets/icons/hammer.png")}
+#social-discord{--icon-image: url("./assets/icons/discord.png")}
+#social-github{--icon-image: url("./assets/icons/github.png")}
+
+.mainContent, .main-title{
+    margin-left: 230px;
+}
+
+.homepage{
+    margin: auto;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cat-image{
+    width: 100px;
+    height: 100px;
+    align-self: center;
+    cursor: pointer;
+}
