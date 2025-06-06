@@ -12,4 +12,25 @@ const catImages = ["catmunch.gif", "catpet.gif", "catyes.gif"]
 document.querySelector(".cat-image").src = `./assets/${catImages[Math.floor(Math.random() * 3)]}`
 document.querySelector(".cat-image").onclick = () => document.querySelector('.cat-sound').play()
 
-window.pageRenderer.renderPage('home')
+document.querySelector(".search").addEventListener('input', (event) => {
+    Array.from(document.querySelectorAll(".weblist-card")).forEach(element => element.toggleAttribute("hidden",!element.dataset.name.startsWith(event.target.value)))
+})
+
+if(localStorage.getItem("checked-extension-option")){
+    document.querySelector(`input[value='${localStorage.getItem("checked-extension-option")}']`).setAttribute("checked","")
+}else{
+    document.querySelector("input[value='Download File']").setAttribute("checked","")
+}
+
+document.querySelector(".extoptions").addEventListener('input', (event) => localStorage.setItem("checked-extension-option",event.target.value))
+document.querySelector(".fullscreen-icon").addEventListener('click',()=>document.querySelector(".frame").requestFullscreen())
+
+window.searchParameters = new URLSearchParams(window.location.search)
+
+if(location.hash != ''){
+    pageRenderer.renderPage(location.hash)
+}else if(sessionStorage.getItem('loaded-page')){
+    pageRenderer.renderPage(sessionStorage.getItem('loaded-page'))
+}else{
+    pageRenderer.renderPage('home')
+}
