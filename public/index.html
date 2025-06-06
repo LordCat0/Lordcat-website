@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./assets/cat.png">
     <style>[hidden]{display: none;}</style>
-    <script src="scripts/functions.js"></script>
+    <script src="./scripts/functions.js"></script>
 </head>
 <body>
 <h1 class="main-title">~ LORD CAT ~</h1>
@@ -15,6 +16,7 @@
     <div id="home">Home</div>
     <div id="games">Games</div>
     <div id="tools">Tools</div>
+    <div id="extensions">Extensions</div>
     <div class="wrapper">
         <div id="social-discord">Discord</div>
         <div id="social-github">Github</div>
@@ -36,11 +38,39 @@
             <li>Mostly active on discord</li>
             <li>Will sometimes release scratch extensions and games</li>
         </ul>
-        <h2>Check out some of my cool stuff (or dont, its up to you)</h2>
+        <h2>Check out some of my cool stuff<span style="font-size: small; opacity: 0.5;"> (or dont, its up to you)</span></h2>
         <h3>Feel free to contact me at any time, my DM's will always be open.</h3>
     </div>
+    <div class="ribbon" hidden>
+        <input class="search" placeholder="Search">
+        <form class="extoptions" hidden>
+            <label><input type="radio" name="extoptions" value="Download File">Download File</label>
+            <label><input type="radio" name="extoptions" value="Copy Extension">Copy Extension</label>
+            <label><input type="radio" name="extoptions" value="Copy URL">Copy URL</label>
+        </form>
+    </div>
     <div class="weblist" hidden>
-
+        <template class="weblist-template">
+            <div>
+                <img>
+                <span></span>
+            </div>
+        </template>
+    </div>
+    <div class="game-viewer" hidden>
+        <h1 class="title">yo</h1>
+        <div class="buttons">
+            <img class="fullscreen-icon" src="./assets/icons/fullscreen.png">
+        </div>
+        <div class="frame">
+            <iframe hidden class="game-embed"></iframe>
+            <img src="./assets/thumbnails/testingThumbnail.png" class="thumbnail">
+            <img src="./assets/icons/play.png" class="play-icon">
+        </div>
+        <div class="description">
+            <h3>Description</h3>
+            <p></p>
+        </div>
     </div>
 </div>
 <script src="scripts/main.js"></script>
