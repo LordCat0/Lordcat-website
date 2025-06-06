@@ -1,0 +1,8 @@
+[
+    {
+        "id": "projectinterfaces-ext",
+        "name": "Project Interfaces",
+        "thumbnail": "ProjectInterfacesExtension.png",
+        "extensionFile": "ProjectInterfaces.js"
+    }
+]
