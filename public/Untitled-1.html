@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Merge Video & Audio with FFmpeg.wasm (Browser)</title>
+  </head>
+  <body>
+    <h1>Merge Video & Audio into an MP4</h1>
+    <p>Select a video file (MP4) and an audio file (MP3 or WAV):</p>
+    <input type="file" id="videoInput" accept="video/mp4" />
+    <input type="file" id="audioInput" accept="audio/mp3, audio/wav" />
+    <button id="mergeButton">Merge and Create MP4</button>
+    <div id="output"></div>
+
+    <!-- Include the UMD build of @ffmpeg/ffmpeg (version 0.10.1) -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.10.1/dist/ffmpeg.min.js"></script>
+    <script>
+      // The UMD build adds a global "FFmpeg" variable
+      const { createFFmpeg, fetchFile } = FFmpeg;
+
+      // Create an instance of FFmpeg
+      const ffmpeg = createFFmpeg({ log: true });
+
+      document.getElementById('mergeButton').addEventListener('click', async () => {
+        const videoFile = document.getElementById('videoInput').files[0];
+        const audioFile = document.getElementById('audioInput').files[0];
+
+        if (!videoFile || !audioFile) {
+          alert('Please select both a video and an audio file.');
+          return;
+        }
+
+        // Load the FFmpeg core (this happens only once)
+        if (!ffmpeg.isLoaded()) {
+          await ffmpeg.load();
+        }
+
+        // Write the input files to FFmpeg’s virtual filesystem
+        ffmpeg.FS('writeFile', 'inputVideo.mp4', await fetchFile(videoFile));
+        // Adjust the file extension if you are using a WAV file (for example, 'inputAudio.wav')
+        ffmpeg.FS('writeFile', 'inputAudio.mp3', await fetchFile(audioFile));
+
+        // Run the FFmpeg command to merge video and audio:
+        // - '-i inputVideo.mp4' loads the video,
+        // - '-i inputAudio.mp3' loads the audio,
+        // - '-c:v copy' copies the video stream without re-encoding,
+        // - '-c:a aac' transcodes the audio to AAC (a common codec for MP4).
+        await ffmpeg.run(
+          '-i', 'inputVideo.mp4',
+          '-i', 'inputAudio.mp3',
+          '-c:v', 'copy',
+          '-c:a', 'aac',
+          'output.mp4'
+        );
+
+        // Read the output file from FFmpeg’s filesystem
+        const data = ffmpeg.FS('readFile', 'output.mp4');
+
+        // Create a Blob for the output and a download link
+        const videoBlob = new Blob([data.buffer], { type: 'video/mp4' });
+        const url = URL.createObjectURL(videoBlob);
+        document.getElementById('output').innerHTML = `<a href="${url}" download="merged.mp4">Download Merged MP4</a>`;
+      });
+    </script>
+  </body>
+</html>
