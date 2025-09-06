@@ -1,4 +1,4 @@
-//LordCat 5/30/2025
+//LordCat 9/6/2025
 
 pageRenderer = {}
 pageRenderer.weblist = {}
@@ -48,16 +48,16 @@ pageRenderer.weblist.render = (jsonData,type) => {
                 case 'Download File':
                     const a = document.createElement('a')
                     a.download = `${item.name}.js`
-                    a.href = `./content/ExtensionFiles/${item.extensionFile}`
+                    a.href = `./extensions/${item.extensionFile}`
                     a.click()
                     a.remove()
                     break;
                 case 'Copy Extension':
-                    pageRenderer.fetch(`./content/ExtensionFiles/${item.extensionFile}`,'text',(code)=> navigator.clipboard.writeText(code))
+                    pageRenderer.fetch(`./extensions/${item.extensionFile}`,'text',(code)=> navigator.clipboard.writeText(code))
                     alert("Copied to clipboard!")
                     break;
                 case 'Copy URL':
-                    navigator.clipboard.writeText(`${location.host}/content/ExtensionFiles/${item.extensionFile}`)
+                    navigator.clipboard.writeText(`${location.host}/extensions/${item.extensionFile}`)
                     alert("Copied to clipboard!")
                     break;
                 default:
@@ -91,7 +91,7 @@ pageRenderer.renderPage = (pageId) => {
     sessionStorage.setItem("loaded-page", pageId)
     pageRenderer.hideAllPages()
         if(pageId.startsWith('view:')){
-        fetch(`./content/games.json`).then(res => 
+        fetch(`./games/manifest.json`).then(res => 
             res.json().then(json => {
                 pageRenderer.renderGameViewer(json.filter(i => i.name = pageId.split('view:')[1]).pop())
             }))
@@ -102,17 +102,17 @@ pageRenderer.renderPage = (pageId) => {
             document.querySelector('.homepage').removeAttribute("hidden")
             break;
         case 'games':
-            window.pageRenderer.fetch(`./content/games.json`, 'json', (data) => {
+            window.pageRenderer.fetch(`./games/manifest.json`, 'json', (data) => {
                 pageRenderer.weblist.render(data,1)
             })
             break;
         case 'tools':
-            window.pageRenderer.fetch(`./content/tools.json`, 'json', (data) => {
+            window.pageRenderer.fetch(`./tools/manifest.json`, 'json', (data) => {
                 pageRenderer.weblist.render(data,2)
             })
             break;
         case 'extensions':
-            window.pageRenderer.fetch(`./content/extensions.json`, 'json', (data) => {
+            window.pageRenderer.fetch(`./extensions/manifest.json`, 'json', (data) => {
                 pageRenderer.weblist.render(data,3)
             })
             /*pageRenderer.weblist.render(Array(30).fill({

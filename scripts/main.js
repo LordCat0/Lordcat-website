@@ -1,4 +1,4 @@
-//LordCat 5/29/2025
+//LordCat 9/6/25
 
 Array.from(document.querySelector(".navbar").children)
 .filter(node=>node.id)
@@ -28,7 +28,8 @@ document.querySelector(".fullscreen-icon").addEventListener('click',()=>document
 window.searchParameters = new URLSearchParams(window.location.search)
 
 if(location.hash != ''){
-    pageRenderer.renderPage(location.hash)
+    pageRenderer.renderPage(location.hash.slice(1));
+    history.replaceState(null, '', window.location.pathname + window.location.search)
 }else if(sessionStorage.getItem('loaded-page')){
     pageRenderer.renderPage(sessionStorage.getItem('loaded-page'))
 }else{
