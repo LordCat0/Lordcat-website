@@ -9,20 +9,23 @@
     <style>[hidden]{display: none;}</style>
     <script src="./scripts/renderer.js"></script>
 </head>
-<body>
+<body style="--main-content-offset: 230px">
 <h1 class="main-title">~ LORD CAT ~</h1>
-<nav class="navbar">
-    <h2>Navigation</h2>
-    <div id="home">Home</div>
-    <div id="games">Games</div>
-    <div id="tools">Tools</div>
-    <div id="extensions">Extensions</div>
-    <div class="wrapper">
-        <div id="social-discord">Discord</div>
-        <div id="social-github">Github</div>
+<nav>
+    <div class="navbar">
+        <h2 class="navbar-item">Navigation</h2>
+        <div class="navbar-item" id="home">Home</div>
+        <div class="navbar-item" id="games">Games</div>
+        <div class="navbar-item" id="tools">Tools</div>
+        <div class="navbar-item" id="extensions">Extensions</div>
+        <div class="wrapper">
+            <div class="navbar-item" id="social-discord">Discord server</div>
+            <div class="navbar-item" id="social-github">Github</div>
+        </div>
     </div>
+        <div class="navbar-toggle">☰</div>
 </nav>
-<div class="mainContent">
+<main>
     <div class="homepage" hidden>
         <img class="cat-image">
         <audio class="cat-sound" src="./assets/meow.wav"></audio>
@@ -46,7 +49,8 @@
         <form class="extoptions" hidden>
             <label><input type="radio" name="extoptions" value="Download File">Download File</label>
             <label><input type="radio" name="extoptions" value="Copy Extension">Copy Extension</label>
-            <label><input type="radio" name="extoptions" value="Copy URL">Copy URL</label>
+            <!-- Copy URL option is hidden incase I stop hosting this site one day. -->
+             <label style="display: none;"><input type="radio" name="extoptions" value="Copy URL">Copy URL</label>
         </form>
     </div>
     <div class="weblist" hidden>
@@ -72,7 +76,7 @@
             <p></p>
         </div>
     </div>
-</div>
+</main>
 <script src="scripts/main.js"></script>
 </body>
 </html>

@@ -1,9 +1,14 @@
 //LordCat 9/6/2025
 
+const weblistPages = ["games", "tools", "extensions"];
+
 pageRenderer = {}
 pageRenderer.weblist = {}
 
 pageRenderer.fetch = (url, type, callback) => fetch(url).then(res => res[type]().then(data => callback(data)))
+
+pageRenderer.currentPage = null;
+pageRenderer.temporaryElements = [];
 
 pageRenderer.renderGameViewer = (item) => {
     sessionStorage.setItem("loaded-page", `view:${item.name}`)
@@ -75,11 +80,11 @@ pageRenderer.weblist.render = (jsonData,type) => {
 }
 
 pageRenderer.weblist.unrender = () => {
-    document.querySelector('.weblist').setAttribute("hidden", '')
-    document.querySelector(".ribbon").setAttribute("hidden","")
-    document.querySelector(".game-viewer").setAttribute("hidden","")
-    document.querySelector(".game-embed").src = "about:blank"
-    Array.from(document.querySelectorAll('.weblist-card')).forEach(element => element.remove())
+    document.querySelector('.weblist').setAttribute("hidden", '');
+    document.querySelector(".ribbon").setAttribute("hidden","");
+    document.querySelector(".game-viewer").setAttribute("hidden","");
+    document.querySelector(".game-embed").src = "about:blank";
+    Array.from(document.querySelectorAll('.weblist-card')).forEach(element => element.remove());
 }
 
 pageRenderer.hideAllPages = () => {
@@ -88,8 +93,13 @@ pageRenderer.hideAllPages = () => {
 }
 
 pageRenderer.renderPage = (pageId) => {
-    sessionStorage.setItem("loaded-page", pageId)
-    pageRenderer.hideAllPages()
+    sessionStorage.setItem("loaded-page", pageId);
+    if(weblistPages.includes(pageRenderer.currentPage) && weblistPages.includes(pageId)){
+        Array.from(document.querySelectorAll('.weblist-card')).forEach(element => element.remove());
+    }else{
+        pageRenderer.hideAllPages();
+    }
+    pageRenderer.currentPage = pageId;
         if(pageId.startsWith('view:')){
         fetch(`./games/manifest.json`).then(res => 
             res.json().then(json => {
@@ -129,5 +139,5 @@ pageRenderer.renderPage = (pageId) => {
     }
 }
 pageRenderer.setElementTemporary = (element) => {
-    
+    pageRenderer.temporaryElements.push(element);
 }

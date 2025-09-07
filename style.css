@@ -5,13 +5,14 @@
     color-scheme: dark;
 }body{
     font-family: sans-serif;
+}
 
-}.main-title{
+.main-title{
     font-family: "Josefin Sans", sans-serif;
     text-align: center;
 }
 
-.navbar{
+nav{
     background-color: #1a1919;
     width: 200px;
     height: 100vh;
@@ -19,15 +20,30 @@
     left: 0;
     top: 0;
     padding: 7px;
+    overflow: hidden;
+
+}
+
+.navbar{
+    height: 100%;
+}
+
+.navbar-toggle{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: x-large;
+    cursor: pointer;
+    user-select: none;
 }
 
 .navbar h2{
     margin: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.navbar div:not(.wrapper){
+.navbar div:not(.wrapper, .navbar-toggle){
     padding: 7px;
     margin: 5px;
     cursor: pointer;
@@ -41,7 +57,7 @@
     margin-top: 10px;
 }
 
-.navbar div::before{
+.navbar div:not(.navbar-toggle):before{
     content: '';
     display: inline-block;
     width: 25px;
@@ -51,7 +67,7 @@
     margin-right: 15px;
 }
 
-.navbar div:not(.wrapper):hover{
+.navbar div:not(.wrapper, .navbar-toggle):hover{
     background-color: #161515;
 }
 
@@ -78,8 +94,8 @@
 #social-discord{--icon-image: url("./assets/icons/discord.png")}
 #social-github{--icon-image: url("./assets/icons/github.png")}
 
-.mainContent, .main-title{
-    margin-left: 230px;
+main, .main-title{
+    margin-left: var(--main-content-offset);
 }
 
 .homepage{
